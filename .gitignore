@@ -5,8 +5,8 @@ assemblyscript/**/*
 **/.DS_Store
 
 # Save the dist folder but not output
-dist/**/*
-!dist/README.md
+**/wasm/dist/**/*
+!**/wasm/dist/README.md
 
 # Logs
 logs
