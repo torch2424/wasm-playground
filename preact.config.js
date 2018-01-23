@@ -8,4 +8,6 @@
  **/
 export default function (config, env, helpers) {
   /** you can change webpack config here **/
+  console.log(config);
+  console.log('Webpack Dev Server Config: ', config.devServer);
 }

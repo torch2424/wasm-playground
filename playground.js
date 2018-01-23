@@ -1,9 +1,9 @@
 // Simply a ES6 version of the Assembly script game of life demo
 // https://github.com/AssemblyScript/assemblyscript/tree/master/examples/game-of-life
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import fetch from 'unfetch'
 
-export default class Playground extends Component {
+export class Playground extends Component {
 
   constructor() {
 		super();
@@ -14,7 +14,7 @@ export default class Playground extends Component {
 	}
 
   componentDidMount() {
-    console.log('Playground Component did mount');
+    console.log('Playground componentDidMount()');
     this.initialize();
   }
 
@@ -74,9 +74,6 @@ export default class Playground extends Component {
 	render() {
 		return (
       <div>
-        <br/>
-        <br/>
-        <h1>Wasm Playground</h1>
   			<canvas id="canvas" width="640" height="480">
         </canvas>
       </div>

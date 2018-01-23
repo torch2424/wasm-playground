@@ -3,6 +3,8 @@ A Wasm playground with preact as a shell, and assemblyscript as the wasm build t
 
 Requires assembly script to be manually cloned https://github.com/AssemblyScript/assemblyscript
 
+How to create the project. Install assembly script. download preact cli. `preact create simple <project-name>`. https://github.com/AssemblyScript/assemblyscript/tree/master/examples/game-of-life . `npm run dev`. `npm run wasm:build`
+
 ## CLI Commands
 
 ``` bash
