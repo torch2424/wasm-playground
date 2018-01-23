@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 
 import Header from './header';
+import Playground from './playground'
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 // import Home from 'async!../routes/home';
@@ -20,6 +21,9 @@ export default class App extends Component {
 		return (
 			<div id="app">
 				<Header />
+
+				<Playground></Playground>
+
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Profile path="/profile/" user="me" />
