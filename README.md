@@ -1,6 +1,8 @@
 # wasm-playground
 A Wasm playground with preact as a shell, and assemblyscript as the wasm build tool
 
+Requires assembly script to be manually cloned https://github.com/AssemblyScript/assemblyscript
+
 ## CLI Commands
 
 ``` bash

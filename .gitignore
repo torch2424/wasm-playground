@@ -1,5 +1,12 @@
+# assemblyscript needs to be manually cloned
+assemblyscript/**/*
+
 # System Files
 **/.DS_Store
+
+# Save the dist folder but not output
+dist/**/*
+!dist/README.md
 
 # Logs
 logs
