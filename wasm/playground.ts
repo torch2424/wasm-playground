@@ -1,6 +1,6 @@
 // https://github.com/AssemblyScript/assemblyscript/wiki/Built-in-functions
 
-// Global variable bound to module
+// Global variable bound to module 
 let test: u32;
 
 // Export a funciton to initialize the module variables

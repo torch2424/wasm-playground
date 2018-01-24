@@ -1,12 +1,11 @@
 # assemblyscript needs to be manually cloned
 assemblyscript/**/*
 
+# Dont save dist folder
+dist/*
+
 # System Files
 **/.DS_Store
-
-# Save the dist folder but not output
-**/wasm/dist/**/*
-!**/wasm/dist/README.md
 
 # Logs
 logs
