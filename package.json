@@ -9,7 +9,7 @@
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
-    "wasm:build": "asc src/wasm/playground.ts -b src/wasm/dist/playground.untouched.wasm -t src/wasm/dist/playground.untouched.wast --validate"
+    "wasm:build": "asc wasm/playground.ts -b wasm/dist/playground.untouched.wasm -t wasm/dist/playground.untouched.wast --validate"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"

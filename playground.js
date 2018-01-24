@@ -7,74 +7,85 @@ export class Playground extends Component {
 
   constructor() {
 		super();
-		// set initial time:
+		// set our state to if we are initialized or not
 		this.state = {
 			initialized: false
 		};
 	}
 
   componentDidMount() {
+    console.clear();
     console.log('Playground componentDidMount()');
     this.initialize();
   }
 
   initialize() {
-
+    // Some hack-y code to test loading the wasm module
     if(this.state.initialized) return;
     this.state.initialized = true;
 
+    // Getting started with wasm
+    // http://webassembly.org/getting-started/js-api/
+
+    // Load wasm module with fetch
     fetch('wasm/dist/playground.untouched.wasm')
     .then(response => response.arrayBuffer())
     .then(binary => {
 
-        console.log('Playground wasm instantiated');
+      // Log we got the wasm module loaded
+      console.log('Playground wasm instantiated');
 
-        // Instantiate the module
-        var module = new WebAssembly.Module(binary);
-        var instance = new WebAssembly.Instance(module, { /* no imports */ });
-        // Set up the canvas with a 2D rendering context
-        var cnv = document.getElementById("canvas");
-        var ctx = cnv.getContext("2d");
-        var w = cnv.width,
-            h = cnv.height,
-            s = w * h, // memory required to store either input or output
-            S = s + s; // total memory required to store input and output
-        // Grow the (exported) memory if its size isn't sufficient
-        var memory = instance.exports.memory;
-        if (memory.buffer.byteLength < S)
-          memory.grow(Math.ceil((S - memory.buffer.byteLength) / 65536));
-        // Initialize with width and height
-        instance.exports.init(w, h);
-        // Fill input at [0, s-1] with random live cells
-        var mem = new Uint8Array(memory.buffer);
-        for (var y = 0; y < h; ++y)
-          for (var x = 0; x < w; ++x)
-            mem[y * w + x] = Math.random() > 0.1 ? 0 : 1;
-        // Update about 30 times a second
-        (function update() {
-          setTimeout(update, 33);
-          instance.exports.step();
-          mem.set(mem.subarray(s, S), 0); // copy output -> input
-        })();
-        // Keep rendering the output at [s, 2*s-1]
-        (function render() {
-          requestAnimationFrame(render);
-          ctx.clearRect(0, 0, w, h);
-          ctx.fillStyle = "#333";
-          for (var y = 0; y < h; ++y)
-            for (var x = 0; x < w; ++x)
-              if (mem[s + y * w + x])
-                ctx.fillRect(x, y, 1, 1);
-        })();
-      }).catch(err => {
-        throw err;
-      });
+      // Create the wasm module, and get it's instance
+      const module = new WebAssembly.Module(binary);
+      const instance = new WebAssembly.Instance(module, {});
+
+      // Get our memory from our wasm instance
+      const memory = instance.exports.memory;
+
+      // Grow our wasm memory to what we need if not already
+      console.log('Growing Memory if needed...');
+      console.log('Current memory size:', memory.buffer.byteLength);
+      if (memory.buffer.byteLength < 0) {
+        console.log('Growing memory...')
+        memory.grow(1);
+        console.log('New memory size:', memory.buffer.byteLength);
+      } else {
+        console.log('Not growing memory...');
+      }
+
+      // Call the initialize function on our wasm instance
+      instance.exports.init(10);
+
+      // Testing returning values with wasm
+      var returnVal = instance.exports.storeTest();
+      console.log('Returning values from storeTest() in wasm: ', returnVal);
+
+      // Get value from memory of wasm
+      var wasmMem = new Uint32Array(memory.buffer);
+      console.log('Wasm Memory: ', wasmMem);
+
+      // Try to insert into memory from JS, and check it from within wasm
+      wasmMem[1] = 24;
+      console.log("loadTest()", instance.exports.loadTest());
+
+
+      // Show the memory on our canvas
+      const canvas = document.querySelector('#canvas').getContext("2d");
+      canvas.font = "16px Arial";
+      canvas.fillText('Please see console for most wasm testing results', 5, 20);
+      canvas.fillText('Wasm memory strinigified below:', 5, 75);
+      canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 100);
+    });
+
   }
 
 	render() {
 		return (
       <div>
-  			<canvas id="canvas" width="640" height="480">
+  			<canvas id="canvas"
+          style="border: 1px solid black;"
+          width="640"
+          height="480">
         </canvas>
       </div>
 		);
