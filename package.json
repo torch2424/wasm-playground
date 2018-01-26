@@ -10,7 +10,7 @@
     "dev": "preact watch",
     "lint": "eslint src",
     "wasm:watch": "npx watch \"npm run wasm:build\" wasm",
-    "wasm:build": "mkdir -p dist/wasm && asc wasm/playground.ts -b dist/wasm/playground.untouched.wasm -t dist/wasm/playground.untouched.wast --validate"
+    "wasm:build": "mkdir -p dist/wasm/assemblyscript && asc wasm/assemblyscript/playground.ts -b dist/wasm/assemblyscript/playground.untouched.wasm -t dist/wasm/assemblyscript/playground.untouched.wast --validate"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"

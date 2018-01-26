@@ -28,7 +28,7 @@ export class Playground extends Component {
     // http://webassembly.org/getting-started/js-api/
 
     // Load wasm module with fetch
-    fetch('dist/wasm/playground.untouched.wasm')
+    fetch('dist/wasm/assemblyscript/playground.untouched.wasm')
     .then(response => response.arrayBuffer())
     .then(binary => {
 
