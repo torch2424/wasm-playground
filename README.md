@@ -3,6 +3,11 @@ A Wasm playground with preact as a shell, and assemblyscript as the wasm build t
 
 Requires assembly script to be manually cloned https://github.com/AssemblyScript/assemblyscript
 
+
+Currently no docs, but in the Future, Go:
+https://github.com/golang/go/issues/18892
+https://github.com/neelance/go/tree/wasm-wip/misc/wasm
+
 ### How to re-create the project.
 
 **TODO, make this nicer**
