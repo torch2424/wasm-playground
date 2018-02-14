@@ -28,7 +28,7 @@ export class Playground extends Component {
     // http://webassembly.org/getting-started/js-api/
 
     // Load wasm module with fetch
-    fetch('dist/wasm/assemblyscript/playground.untouched.wasm')
+    fetch('dist/wasm/assemblyscript/index.untouched.wasm')
     .then(response => response.arrayBuffer())
     .then(binary => {
 
@@ -67,21 +67,24 @@ export class Playground extends Component {
       // Try to insert into memory from JS, and check it from within wasm
       wasmMem[1] = 24;
       console.log("loadTest()", instance.exports.loadTest());
+      console.log("wasmImportsTest()", instance.exports.wasmImportsTest());
 
 
       // Show the memory on our canvas
       const canvas = document.querySelector('#canvas').getContext("2d");
+      canvas.font = "48px Arial";
+      canvas.fillText('wasm-playground', 5, 40);
       canvas.font = "16px Arial";
-      canvas.fillText('Please see console for most wasm testing results', 5, 20);
-      canvas.fillText('Wasm memory strinigified below:', 5, 75);
-      canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 100);
+      canvas.fillText('Please see console for most wasm testing results', 5, 80);
+      canvas.fillText('Wasm memory strinigified below:', 5, 115);
+      canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 140);
     });
 
   }
 
 	render() {
 		return (
-      <div>
+      <div className="canvas-container">
   			<canvas id="canvas"
           style="border: 1px solid black;"
           width="640"

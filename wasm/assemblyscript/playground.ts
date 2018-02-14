@@ -1,6 +1,6 @@
 // https://github.com/AssemblyScript/assemblyscript/wiki/Built-in-functions
 
-// Global variable bound to module 
+// Global variable bound to module
 let test: u32;
 
 // Export a funciton to initialize the module variables
@@ -20,4 +20,9 @@ export function loadTest(): u32 {
   // load the value test, in memory location 1 of the index.
   // 1 in index = 4 bytes. Because, our memory is divided into unsigned 32 bit (4 bytes) integers.
   return load<u32>(4);
+}
+
+export function wasmExportsTest(): u8 {
+  let exportValue: u8 = 24;
+  return 24;
 }
