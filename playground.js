@@ -90,8 +90,10 @@ export class Playground extends Component {
         console.log(`unsignedIntegerOverflowBug(), 0x${instance.exports.unsignedIntegerOverflowBug().toString(16)}`);
 
 
-        
+
         // Working
+        console.log(`deepExportedFunction(), 0x${instance.exports.deepExportedFunction().toString(16)}`);
+        console.log(`deepCircle(), 0x${instance.exports.deepCircle().toString(16)}`);
         console.log(`unsignedToEqualSizeSignedBug(), 0x${instance.exports.unsignedToEqualSizeSignedBug().toString(16)}`);
         console.log(`unsignedToLargerSizeSignedBug(), 0x${instance.exports.unsignedToLargerSizeSignedBug().toString(16)}`);
 

@@ -3,9 +3,16 @@
 // Global variable bound to module
 let test: u32;
 
+// Testing deep exports
+export {
+  deepExportedFunction,
+  deepCircle
+} from './deepExport';
+
 // Static Classes
 export class Testing {
   static test: u8 = 0x01;
+  static circular: u8 = 0x25;
 }
 
 // Export a funciton to initialize the module variables

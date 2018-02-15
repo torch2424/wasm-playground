@@ -6,6 +6,11 @@ export {
   loadTest
 } from './playground';
 
+export {
+  deepExportedFunction,
+  deepCircle
+} from './playground';
+
 import {
   wasmExportsTest
 } from './playground';
