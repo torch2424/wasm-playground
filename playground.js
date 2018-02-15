@@ -32,54 +32,57 @@ export class Playground extends Component {
     .then(response => response.arrayBuffer())
     .then(binary => {
 
-      // Log we got the wasm module loaded
-      console.log('Playground wasm instantiated');
+      // Using WebAssembly.instantiate as it will allow for large binaries, and is better practice
+      WebAssembly.instantiate(binary, {}).then((instantiatedWasm) => {
 
-      // Create the wasm module, and get it's instance
-      const module = new WebAssembly.Module(binary);
-      const instance = new WebAssembly.Instance(module, {});
+        // Log we got the wasm module loaded
+        console.log('Playground wasm instantiated');
 
-      // Get our memory from our wasm instance
-      const memory = instance.exports.memory;
+        // Create the wasm module, and get it's instance
+        const instance = instantiatedWasm.instance;
+        const module = instantiatedWasm.module;
 
-      // Grow our wasm memory to what we need if not already
-      console.log('Growing Memory if needed...');
-      console.log('Current memory size:', memory.buffer.byteLength);
-      if (memory.buffer.byteLength < 0) {
-        console.log('Growing memory...')
-        memory.grow(1);
-        console.log('New memory size:', memory.buffer.byteLength);
-      } else {
-        console.log('Not growing memory...');
-      }
+        // Get our memory from our wasm instance
+        const memory = instance.exports.memory;
 
-      // Call the initialize function on our wasm instance
-      instance.exports.init(10);
+        // Grow our wasm memory to what we need if not already (shouldn't grow, minimum is 64K)
+        console.log('Growing Memory if needed...');
+        console.log('Current memory size:', memory.buffer.byteLength);
+        if (memory.buffer.byteLength < 0) {
+          console.log('Growing memory...')
+          memory.grow(1);
+          console.log('New memory size:', memory.buffer.byteLength);
+        } else {
+          console.log('Not growing memory...');
+        }
 
-      // Testing returning values with wasm
-      var returnVal = instance.exports.storeTest();
-      console.log('Returning values from storeTest() in wasm: ', returnVal);
+        // Call the initialize function on our wasm instance
+        instance.exports.init(10);
 
-      // Get value from memory of wasm
-      var wasmMem = new Uint32Array(memory.buffer);
-      console.log('Wasm Memory: ', wasmMem);
+        // Testing returning values with wasm
+        var returnVal = instance.exports.storeTest();
+        console.log('Returning values from storeTest() in wasm: ', returnVal);
 
-      // Try to insert into memory from JS, and check it from within wasm
-      wasmMem[1] = 24;
-      console.log("loadTest()", instance.exports.loadTest());
-      console.log("wasmImportsTest()", instance.exports.wasmImportsTest());
+        // Get value from memory of wasm
+        var wasmMem = new Uint32Array(memory.buffer);
+        console.log('Wasm Memory: ', wasmMem);
+
+        // Try to insert into memory from JS, and check it from within wasm
+        wasmMem[1] = 24;
+        console.log("loadTest()", instance.exports.loadTest());
+        console.log("wasmImportsTest()", instance.exports.wasmImportsTest());
 
 
-      // Show the memory on our canvas
-      const canvas = document.querySelector('#canvas').getContext("2d");
-      canvas.font = "48px Arial";
-      canvas.fillText('wasm-playground', 5, 40);
-      canvas.font = "16px Arial";
-      canvas.fillText('Please see console for most wasm testing results', 5, 80);
-      canvas.fillText('Wasm memory strinigified below:', 5, 115);
-      canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 140);
+        // Show the memory on our canvas
+        const canvas = document.querySelector('#canvas').getContext("2d");
+        canvas.font = "48px Arial";
+        canvas.fillText('wasm-playground', 5, 40);
+        canvas.font = "16px Arial";
+        canvas.fillText('Please see console for most wasm testing results', 5, 80);
+        canvas.fillText('Wasm memory strinigified below:', 5, 115);
+        canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 140);
+      });
     });
-
   }
 
 	render() {
