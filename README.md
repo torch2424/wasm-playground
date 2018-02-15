@@ -1,30 +1,56 @@
 # wasm-playground
-A Wasm playground with preact as a shell, and assemblyscript as the wasm build tool
 
-Requires assembly script to be manually cloned https://github.com/AssemblyScript/assemblyscript
+A Wasm playground with preact as a shell. Goal is to offer multiple sources of compiling wasm, but personally only uses my favorite: [Assemblyscript](https://github.com/AssemblyScript/assemblyscript). Was used as a starting ground for [Wasmboy](https://github.com/torch2424/wasmBoy).
+
+[Wasm Playground Screenshot](./docs/wasmPlaygroundScreenshot)
+
+# Project Layout
+
+* `wasm/` - folder with source for wasm modules, with subdirectories for the language used.
+
+* `index.js` - base app component for the preact shell.
+
+* `playground.js` - component that interacts with the wasm module.
+
+* `dist/` - build output for wasm modules
 
 
-Currently no docs, but in the Future, Go:
-https://github.com/golang/go/issues/18892
-https://github.com/neelance/go/tree/wasm-wip/misc/wasm
+# How the Playground was built.
 
-### How to re-create the project.
+* Install [AssemblyScript](https://github.com/AssemblyScript/assemblyscript).
 
-**TODO, make this nicer**
+`npm install AssemblyScript/assemblyscript`
 
-Install assembly script.
+* Install the [preact cli](https://github.com/developit/preact-cli)
 
-download preact cli.
+* Create a preact project with the preact cli
 
 `preact create simple <project-name>`.
 
-https://github.com/AssemblyScript/assemblyscript/tree/master/examples/game-of-life .
+* Serve the react Project
 
-`npm run dev`.
+`npm run dev`
 
-`npm run wasm:watch`.
+* Create a npm script step for building wasm in your `package.json`
 
-### CLI Commands
+`"wasm:build": "mkdir -p dist/wasm/assemblyscript && asc wasm/assemblyscript/index.ts -b dist/wasm/assemblyscript/index.untouched.wasm -t dist/wasm/assemblyscript/index.untouched.wast --validate && echo \"Done!\""`
+
+* Create a npm script for watching your wasm files to build them using [watch]()
+
+`"wasm:watch": "npx watch \"npm run wasm:build\" wasm"`
+
+* Run the wasm watcher/builder
+
+`npm run wasm:watch`
+
+# Other Planned Wasm Compilers
+
+Currently no docs, but in the Future, Go:
+
+* https://github.com/golang/go/issues/18892
+* https://github.com/neelance/go/tree/wasm-wip/misc/wasm
+
+### Usage (CLI Commands):
 
 ``` bash
 # install dependencies
