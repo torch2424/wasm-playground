@@ -86,7 +86,14 @@ export class Playground extends Component {
         /***********************************
           Assemblyscript bug testing
         ***********************************/
-        console.log(`unsignedIntegerNoOverflow(), 0x${instance.exports.unsignedIntegerNoOverflow().toString(16)}`);
+        // Broken
+        console.log(`unsignedIntegerOverflowBug(), 0x${instance.exports.unsignedIntegerOverflowBug().toString(16)}`);
+
+
+        
+        // Working
+        console.log(`unsignedToEqualSizeSignedBug(), 0x${instance.exports.unsignedToEqualSizeSignedBug().toString(16)}`);
+        console.log(`unsignedToLargerSizeSignedBug(), 0x${instance.exports.unsignedToLargerSizeSignedBug().toString(16)}`);
 
       });
     });

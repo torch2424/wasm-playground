@@ -16,8 +16,30 @@ export function wasmImportsTest(): u8 {
   return newExportValue;
 }
 
-export function unsignedIntegerNoOverflow(): u8 {
+export function unsignedIntegerOverflowBug(): u8 {
   let badByte: u8 = 0xFF;
   badByte++;
   return badByte;
+}
+
+// Basing unsigned to signed with this:
+// https://www.electronics-tutorials.ws/binary/signed-binary-numbers.html
+export function unsignedToEqualSizeSignedBug(): i8 {
+  // 255 or 1111 1111
+  let unsignedByte: u8 = 0xFF;
+
+  // Should be -1 or 1111 1111
+  let signedByte: i8 = <i8>unsignedByte;
+
+  return signedByte;
+}
+
+export function unsignedToLargerSizeSignedBug(): i16 {
+  // 255 or 1111 1111
+  let unsignedByte: u8 = 0xFF;
+
+  // Should be -1 or 1000 0000 0111 1111 (I think)
+  let signedByte: i16 = <i8>unsignedByte;
+
+  return signedByte;
 }
