@@ -3,6 +3,11 @@
 // Global variable bound to module
 let test: u32;
 
+// Static Classes
+export class Testing {
+  static test: u8 = 0x01;
+}
+
 // Export a funciton to initialize the module variables
 export function init(passedVar: u32): void {
   test = passedVar;

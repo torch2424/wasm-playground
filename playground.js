@@ -81,6 +81,13 @@ export class Playground extends Component {
         canvas.fillText('Please see console for most wasm testing results', 5, 80);
         canvas.fillText('Wasm memory strinigified below:', 5, 115);
         canvas.fillText(JSON.stringify(wasmMem, null, 4), 5, 140);
+
+
+        /***********************************
+          Assemblyscript bug testing
+        ***********************************/
+        console.log(`unsignedIntegerNoOverflow(), 0x${instance.exports.unsignedIntegerNoOverflow().toString(16)}`);
+
       });
     });
   }

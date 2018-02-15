@@ -15,3 +15,9 @@ export function wasmImportsTest(): u8 {
   let newExportValue: u8 = 100 + wasmExportsTest();
   return newExportValue;
 }
+
+export function unsignedIntegerNoOverflow(): u8 {
+  let badByte: u8 = 0xFF;
+  badByte++;
+  return badByte;
+}
