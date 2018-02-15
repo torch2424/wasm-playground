@@ -2,7 +2,7 @@
 
 A Wasm playground with preact as a shell. Goal is to offer multiple sources of compiling wasm, but personally only uses my favorite: [Assemblyscript](https://github.com/AssemblyScript/assemblyscript). Was used as a starting ground for [Wasmboy](https://github.com/torch2424/wasmBoy).
 
-[Wasm Playground Screenshot](./docs/wasmPlaygroundScreenshot)
+![Wasm Playground Screenshot](./docs/wasmPlaygroundScreenshot)
 
 # Project Layout
 
