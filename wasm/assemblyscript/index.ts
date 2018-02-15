@@ -7,11 +7,14 @@ export {
 } from './playground';
 
 import {
-  wasmExportsTest
+  wasmExportsTest,
+  Testing
 } from './playground';
 
-export function wasmImportsTest(): u8 {
+export function wasmImportsAndStaticClassesTest(): u8 {
   // Declaring a variable, can't return or else assembly script will error
   let newExportValue: u8 = 100 + wasmExportsTest();
-  return newExportValue;
+  newExportValue = Testing.testValue;
+  Testing.testValue = newExportValue - 10;
+  return Testing.testValue;
 }

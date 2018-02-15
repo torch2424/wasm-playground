@@ -70,7 +70,7 @@ export class Playground extends Component {
         // Try to insert into memory from JS, and check it from within wasm
         wasmMem[1] = 24;
         console.log("loadTest()", instance.exports.loadTest());
-        console.log("wasmImportsTest()", instance.exports.wasmImportsTest());
+        console.log("wasmImportsAndStaticClassesTest()", instance.exports.wasmImportsAndStaticClassesTest());
 
 
         // Show the memory on our canvas
