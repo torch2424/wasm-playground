@@ -2,7 +2,7 @@
 
 A Wasm playground with preact as a shell. Goal is to offer multiple sources of compiling wasm, but personally only uses my favorite: [Assemblyscript](https://github.com/AssemblyScript/assemblyscript). Was used as a starting ground for [Wasmboy](https://github.com/torch2424/wasmBoy).
 
-![Wasm Playground Screenshot](./docs/wasmPlaygroundScreenshot)
+![Wasm Playground Screenshot](./docs/wasmPlaygroundScreenshot.png)
 
 # Project Layout
 
@@ -19,7 +19,7 @@ A Wasm playground with preact as a shell. Goal is to offer multiple sources of c
 
 * Install [AssemblyScript](https://github.com/AssemblyScript/assemblyscript).
 
-`npm install AssemblyScript/assemblyscript`
+`npm install --save-dev AssemblyScript/assemblyscript`
 
 * Install the [preact cli](https://github.com/developit/preact-cli)
 
@@ -33,7 +33,7 @@ A Wasm playground with preact as a shell. Goal is to offer multiple sources of c
 
 * Create a npm script step for building wasm in your `package.json`
 
-`"wasm:build": "mkdir -p dist/wasm/assemblyscript && asc wasm/assemblyscript/index.ts -b dist/wasm/assemblyscript/index.untouched.wasm -t dist/wasm/assemblyscript/index.untouched.wast --validate && echo \"Done!\""`
+`"wasm:build": "mkdir -p dist/wasm/assemblyscript && npx asc wasm/assemblyscript/index.ts -b dist/wasm/assemblyscript/index.untouched.wasm -t dist/wasm/assemblyscript/index.untouched.wast --validate && echo \"Done!\""`
 
 * Create a npm script for watching your wasm files to build them using [watch]()
 
