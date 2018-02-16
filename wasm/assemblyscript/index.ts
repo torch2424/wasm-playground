@@ -27,6 +27,26 @@ export function unsignedIntegerOverflowBug(): u8 {
   return badByte;
 }
 
+export function unsignedIntegerOverflowBugPlusEqualOne(): u8 {
+  let badByte: u8 = 0xFF;
+  badByte += 1;
+  return badByte;
+}
+
+export function unsignedIntegerOverflowBugPlusOne(): u8 {
+  let badByte: u8 = 0xFF;
+  badByte = badByte + 1;
+  return badByte;
+}
+
+
+export function unsignedIntegerOverflowBugPlusVariable(): u8 {
+  let badByte: u8 = 0xFF;
+  let increment: u8 = 0x01;
+  return badByte + increment;
+}
+
+
 // Basing unsigned to signed with this:
 // https://www.electronics-tutorials.ws/binary/signed-binary-numbers.html
 export function unsignedToEqualSizeSignedBug(): i8 {

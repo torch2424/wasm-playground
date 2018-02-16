@@ -88,6 +88,9 @@ export class Playground extends Component {
         ***********************************/
         // Broken
         console.log(`unsignedIntegerOverflowBug(), 0x${instance.exports.unsignedIntegerOverflowBug().toString(16)}`);
+        console.log(`unsignedIntegerOverflowBugPlusEqualOne(), 0x${instance.exports.unsignedIntegerOverflowBugPlusEqualOne().toString(16)}`);
+        console.log(`unsignedIntegerOverflowBugPlusOne(), 0x${instance.exports.unsignedIntegerOverflowBugPlusOne().toString(16)}`);
+        console.log(`unsignedIntegerOverflowBugPlusVariable(), 0x${instance.exports.unsignedIntegerOverflowBugPlusVariable().toString(16)}`);
 
 
 
